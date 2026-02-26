@@ -5,13 +5,14 @@ import type { NodeDefinition, SupportedNodeType } from '../types'
 interface NodesPanelProps {
   nodeDefinitions: NodeDefinition[]
   onDragStart: (event: DragEvent<HTMLDivElement>, nodeType: SupportedNodeType) => void
+  onQuickAddNode: (nodeType: SupportedNodeType) => void
 }
 
-function NodesPanel({ nodeDefinitions, onDragStart }: NodesPanelProps) {
+function NodesPanel({ nodeDefinitions, onDragStart, onQuickAddNode }: NodesPanelProps) {
   return (
     <section className="panel">
       <h2 className="panel__title">Nodes</h2>
-      <p className="panel__subtitle">Drag a node to the canvas.</p>
+      <p className="panel__subtitle">Drag on desktop, or tap Add on mobile.</p>
 
       <div className="node-list">
         {nodeDefinitions.map((node) => (
@@ -21,8 +22,13 @@ function NodesPanel({ nodeDefinitions, onDragStart }: NodesPanelProps) {
             draggable
             onDragStart={(event) => onDragStart(event, node.type)}
           >
-            <p className="node-item__label">{node.label}</p>
-            <p className="node-item__hint">{node.hint}</p>
+            <div>
+              <p className="node-item__label">{node.label}</p>
+              <p className="node-item__hint">{node.hint}</p>
+            </div>
+            <button className="node-item__add" type="button" onClick={() => onQuickAddNode(node.type)}>
+              Add
+            </button>
           </div>
         ))}
       </div>

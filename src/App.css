@@ -1,5 +1,6 @@
 .app-shell {
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   background: linear-gradient(140deg, #f7fafc 0%, #eef5ff 55%, #f9fbff 100%);
@@ -111,6 +112,10 @@
   padding: 12px;
   background: #f7faff;
   cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .node-item:active {
@@ -128,6 +133,22 @@
   margin: 6px 0 0;
   color: #6a7489;
   font-size: 0.82rem;
+}
+
+.node-item__add {
+  border: 1px solid #7aa2ff;
+  border-radius: 8px;
+  background: #edf3ff;
+  color: #1f4ea8;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.node-item__add:hover {
+  background: #e2ecff;
 }
 
 .settings-header {
@@ -244,5 +265,9 @@
 
   .top-bar {
     padding: 0 12px;
+  }
+
+  .node-item {
+    cursor: default;
   }
 }

@@ -24,6 +24,7 @@ export interface UseFlowBuilderResult {
   onDragStart: (event: DragEvent<HTMLDivElement>, nodeType: SupportedNodeType) => void
   onDragOver: (event: DragEvent) => void
   onDrop: (event: DragEvent) => void
+  onQuickAddNode: (nodeType: SupportedNodeType) => void
   onConnect: (connection: Connection) => void
   onSave: () => void
   onNodeClick: (nodeId: string) => void
@@ -47,6 +48,26 @@ export function useFlowBuilder(): UseFlowBuilderResult {
   )
 
   const createNodeId = () => `node_${idCounterRef.current++}`
+
+  const addNodeAtPosition = useCallback(
+    (nodeType: SupportedNodeType, x: number, y: number) => {
+      const definition = NODE_DEFINITIONS.find((item) => item.type === nodeType)
+      if (!definition) {
+        return
+      }
+
+      const newNode: FlowNode = {
+        id: createNodeId(),
+        type: definition.type,
+        position: { x, y },
+        data: { ...definition.defaultData },
+      }
+
+      setNodes((currentNodes) => currentNodes.concat(newNode))
+      setSaveStatus(null)
+    },
+    [setNodes],
+  )
 
   const onDragStart = useCallback(
     (event: DragEvent<HTMLDivElement>, nodeType: SupportedNodeType) => {
@@ -81,17 +102,28 @@ export function useFlowBuilder(): UseFlowBuilderResult {
         y: event.clientY - bounds.top,
       })
 
-      const newNode: FlowNode = {
-        id: createNodeId(),
-        type: definition.type,
-        position,
-        data: { ...definition.defaultData },
+      addNodeAtPosition(definition.type, position.x, position.y)
+    },
+    [addNodeAtPosition, reactFlowInstance],
+  )
+
+  const onQuickAddNode = useCallback(
+    (nodeType: SupportedNodeType) => {
+      if (!reactFlowInstance || !wrapperRef.current) {
+        const offset = nodes.length * 24
+        addNodeAtPosition(nodeType, 120 + offset, 120 + offset)
+        return
       }
 
-      setNodes((currentNodes) => currentNodes.concat(newNode))
-      setSaveStatus(null)
+      const bounds = wrapperRef.current.getBoundingClientRect()
+      const viewportCenter = reactFlowInstance.project({
+        x: bounds.width / 2,
+        y: bounds.height / 2,
+      })
+      const offset = nodes.length * 18
+      addNodeAtPosition(nodeType, viewportCenter.x + offset, viewportCenter.y + offset)
     },
-    [reactFlowInstance, setNodes],
+    [addNodeAtPosition, nodes.length, reactFlowInstance],
   )
 
   const onConnect = useCallback(
@@ -156,6 +188,7 @@ export function useFlowBuilder(): UseFlowBuilderResult {
     onDragStart,
     onDragOver,
     onDrop,
+    onQuickAddNode,
     onConnect,
     onSave,
     onNodeClick,

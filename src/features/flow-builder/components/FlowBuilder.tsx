@@ -24,6 +24,7 @@ function FlowBuilder() {
     onDragStart,
     onDragOver,
     onDrop,
+    onQuickAddNode,
     onConnect,
     onSave,
     onNodeClick,
@@ -67,7 +68,11 @@ function FlowBuilder() {
               onTextChange={onNodeTextChange}
             />
           ) : (
-            <NodesPanel nodeDefinitions={NODE_DEFINITIONS} onDragStart={onDragStart} />
+            <NodesPanel
+              nodeDefinitions={NODE_DEFINITIONS}
+              onDragStart={onDragStart}
+              onQuickAddNode={onQuickAddNode}
+            />
           )}
         </aside>
       </section>
