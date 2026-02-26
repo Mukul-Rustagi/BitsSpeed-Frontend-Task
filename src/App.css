@@ -1,0 +1,248 @@
+.app-shell {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(140deg, #f7fafc 0%, #eef5ff 55%, #f9fbff 100%);
+}
+
+.top-bar {
+  height: 64px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #dfe7f5;
+  background-color: #ffffff;
+}
+
+.top-bar__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1b2a4a;
+}
+
+.save-button {
+  border: 1px solid #7aa2ff;
+  border-radius: 8px;
+  background: #edf3ff;
+  color: #1f4ea8;
+  padding: 9px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.save-button:hover {
+  background: #e2ecff;
+}
+
+.status-banner {
+  margin: 12px 20px 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  border: 1px solid #b7d5b7;
+  background: #eaf8ea;
+  color: #0f5d25;
+}
+
+.status-banner--error {
+  border-color: #f2b1b1;
+  background: #fff0f0;
+  color: #b11e1e;
+}
+
+.builder-layout {
+  flex: 1;
+  min-height: 0;
+  padding: 14px 20px 20px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 16px;
+}
+
+.canvas {
+  border: 1px solid #cfdcf0;
+  border-radius: 12px;
+  background: #fdfefe;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.canvas .react-flow {
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar {
+  border: 1px solid #cfdcf0;
+  border-radius: 12px;
+  background: #ffffff;
+  overflow: auto;
+}
+
+.panel {
+  padding: 18px;
+}
+
+.panel__title {
+  margin: 0;
+  color: #1b2a4a;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.panel__subtitle {
+  margin: 8px 0 0;
+  color: #6a7489;
+  font-size: 0.88rem;
+}
+
+.node-list {
+  margin-top: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.node-item {
+  border: 1px solid #acc8ff;
+  border-radius: 10px;
+  padding: 12px;
+  background: #f7faff;
+  cursor: grab;
+}
+
+.node-item:active {
+  cursor: grabbing;
+}
+
+.node-item__label {
+  margin: 0;
+  color: #2a4f9f;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.node-item__hint {
+  margin: 6px 0 0;
+  color: #6a7489;
+  font-size: 0.82rem;
+}
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.back-button {
+  border: 1px solid #d2ddf1;
+  border-radius: 8px;
+  background: #f7f9fd;
+  color: #304770;
+  padding: 4px 10px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.settings-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #304770;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.settings-input {
+  width: 100%;
+  border: 1px solid #c5d4ee;
+  border-radius: 8px;
+  padding: 10px;
+  resize: vertical;
+  min-height: 130px;
+  color: #1b2a4a;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.settings-input:focus {
+  outline: 2px solid #8ab2ff;
+  border-color: #8ab2ff;
+}
+
+.text-node {
+  min-width: 210px;
+  max-width: 250px;
+  border: 1px solid #c5d4ee;
+  border-radius: 10px;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgb(42 79 159 / 10%);
+}
+
+.text-node--selected {
+  border-color: #6b9cff;
+  box-shadow: 0 8px 20px rgb(35 86 180 / 18%);
+}
+
+.text-node__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: #e9fff4;
+  border-bottom: 1px solid #d4ece1;
+}
+
+.text-node__icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #d7f8e7;
+  color: #19754a;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.text-node__title {
+  color: #19754a;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.text-node__body {
+  margin: 0;
+  padding: 10px 12px;
+  color: #23395d;
+  font-size: 0.85rem;
+  word-break: break-word;
+}
+
+.text-node__handle {
+  width: 10px;
+  height: 10px;
+  border: 2px solid #ffffff;
+  background: #4d7ee3;
+}
+
+@media (max-width: 900px) {
+  .builder-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(360px, 1fr) auto;
+    padding: 12px;
+  }
+
+  .sidebar {
+    min-height: 220px;
+  }
+
+  .top-bar {
+    padding: 0 12px;
+  }
+}
